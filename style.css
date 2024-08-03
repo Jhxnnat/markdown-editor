@@ -3,8 +3,8 @@
 }
 
 header {
-    background-color: #000000;
-    color: white;
+    background-color: #FFEEA9;
+    color: rgb(0, 0, 0);
     text-align: center;
     padding: 6px;
     margin-bottom: 10px;
@@ -28,12 +28,14 @@ header {
     flex: 1;
 }
 .markdown-box {
-    background-color: #FFEEA9;
+    background-color: #FEFFD2;
     overflow-x: scroll;
+    border: 1px solid #9b9b9b;
 }
 .editor-box {
     display: flex;
     background-color: #FEFFD2;
+    border: 1px solid #9b9b9b;
 }
 .editor-text {
     width: 100%;
@@ -63,7 +65,7 @@ header {
 }
 .btn {
     background: none;
-    color: white;
+    color: rgb(0, 0, 0);
     text-align: center;
     text-decoration: none;
     cursor: pointer;
