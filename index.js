@@ -1,10 +1,4 @@
 ///-----------------Code for the editor-----------------///
-
-window.onload = function(){
-    //displayLines();
-    //updateMarkdown();
-}
-
 //displaying the line numbers
 function displayLines(index){
     const editors = document.querySelectorAll('.row');
@@ -54,8 +48,8 @@ function downloadMarkdown(){
         let active = tab.classList.contains('active');
         if (active){
             let index = tab.getAttribute('data-tab');
-            const editors = document.querySelectorAll('.row');
-            const textarea = editors[index-1].querySelector('.editor-text');
+            const row = document.querySelector(".row[data-tab='"+index+"']");
+            const textarea = row.querySelector('.editor-text');
             const content = textarea.value;
             let filename = `markdown${index}.md`;
             let download = document.createElement('a');
@@ -65,6 +59,7 @@ function downloadMarkdown(){
             document.body.appendChild(download);
             download.click();
             document.body.removeChild(download);
+            return;
         }
     });
 }
@@ -75,8 +70,8 @@ function downloadHTML(){
         let active = tab.classList.contains('active');
         if (active){
             let index = tab.getAttribute('data-tab');
-            const editors = document.querySelectorAll('.row');
-            const textarea = editors[index-1].querySelector('.editor-text');
+            const row = document.querySelector(".row[data-tab='"+index+"']");
+            const textarea = row.querySelector('.editor-text');
             //get the html using the markdown parser
             const md = window.markdownit();
             const content = textarea.value;
@@ -100,8 +95,8 @@ function copyMarkdown(){
         let active = tab.classList.contains('active');
         if (active){
             let index = tab.getAttribute('data-tab');
-            const editors = document.querySelectorAll('.row');
-            const textarea = editors[index-1].querySelector('.editor-text');
+            const row = document.querySelector(".row[data-tab='"+index+"']");
+            const textarea = row.querySelector('.editor-text');
             textarea.select();
             textarea.setSelectionRange(0, 99999); //this is for mobile devices
             navigator.clipboard.writeText(textarea.value); //document.execCommand('copy');
@@ -116,8 +111,8 @@ function copyHTML(){
         let active = tab.classList.contains('active');
         if (active){
             let index = tab.getAttribute('data-tab');
-            const editors = document.querySelectorAll('.row');
-            const textarea = editors[index-1].querySelector('.editor-text');
+            const row = document.querySelector(".row[data-tab='"+index+"']");
+            const textarea = row.querySelector('.editor-text');
             //get the html using the markdown-it parser
             const md = window.markdownit();
             const content = textarea.value;
@@ -169,7 +164,7 @@ document.addEventListener('DOMContentLoaded', function() {
         newTabContent.innerHTML = `<div class="row" data-tab="${tabCounter}">
                                         <div id="editor-box" class="column editor-box">
                                             <div id="editor-lines" class="editor-lines"></div>
-                                            <textarea id="editor-text" class="editor-text" spellcheck="false"># Mark-Up! ${tabCounter}</textarea>
+                                            <textarea id="editor-text" class="editor-text" data-tab="${tabCounter} spellcheck="false"># Mark-Up! ${tabCounter}</textarea>
                                         </div>
                                         <div id="markdown" class="column markdown-box"></div>
                                     </div>`;
